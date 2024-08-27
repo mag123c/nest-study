@@ -1,12 +1,14 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
+import { Lecture } from './entities/lecture.entity';
 
-@Controller()
+@Controller('api/v1')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @Get('lectures')
+  async findLectures(): Promise<Lecture[]> {
+    await this.appService.findLectures();
+    throw new Error('TEST');
   }
 }
